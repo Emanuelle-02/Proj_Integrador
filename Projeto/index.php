@@ -1,68 +1,60 @@
 <?php
-    require('bdconex.php');
-?>
 
-<!DOCTYPE html>
-<html>
-    <head>
-	    <title>IFRN-Lib.</title>
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-		<meta name="keywords" content="Library Member Login Form Widget Responsive, Login Form Web Template, Flat Pricing Tables, Flat Drop-Downs, Sign-Up Web Templates, Flat Web Templates, Login Sign-up Responsive Web Template, Smartphone Compatible Web Template, Free Web Designs for Nokia, Samsung, LG, Sony Ericsson, Motorola Web Design" />
-		<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script> 
-        <!-- Estilo css -->
-        <link rel="stylesheet" href="css/estilo.css" type="text/css" media="all">
-	    <!-- Fontes -->
-		<link href="//fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
-    </head>
-    <body>
-	    <h1>IFRN-Lib.</h1>
-		<div class="container">
-			<div class="login">
-				<h2>Login</h2>
-				<!--<formulário>-->
-				<form action="index.php" method="post">
-					<input type="text" Name="Matricula" placeholder="Matricula" required="">
-					<input type="password" Name="Senha" placeholder="Senha" required="">
-				    <div class="send-button">
-					<input type="submit" name="signin"; value="Sign In">
-				</form>
-			</div>
-			<div class="clear"></div>
-		</div>
-		
-		<div class="clear"></div>
-		</div>
-		
-		<div class="footer w3layouts agileits">
-			<p> &copy; 2022 IFRN-Lib.</a></p>	
-		</div>
+/**
+ * Laravel - A PHP Framework For Web Artisans
+ *
+ * @package  Laravel
+ * @author   Taylor Otwell <taylor@laravel.com>
+ */
 
-	<?php
-	if(isset($_POST['signin'])){
-		$u=$_POST['Matricula'];
-		$p=$_POST['Senha'];
-		$c=$_POST['Categoria'];
+define('LARAVEL_START', microtime(true));
 
-		$sql="select * from PROJLIB.usuario where Matricula='$u'";
+/*
+|--------------------------------------------------------------------------
+| Register The Auto Loader
+|--------------------------------------------------------------------------
+|
+| Composer provides a convenient, automatically generated class loader for
+| our application. We just need to utilize it! We'll simply require it
+| into the script here so that we don't have to worry about manual
+| loading any of our classes later on. It feels great to relax.
+|
+*/
 
-		$result = $conn->query($sql);
-		$row = $result->fetch_assoc();
-		$x=$row['Senha'];
-		$y=$row['Tipo'];
-		
-		if(strcasecmp($x,$p)==0 && !empty($u) && !empty($p)){
-			$_SESSION['Matricula']=$u;
-		if($y=='Admin')
-			header('location:admin/home.php');
-		if($y=='Bibliotecario')
-			header('location:bibliotecario/home.php');
-		if($y=='Usuario')
-			header('location:usuario/home.php');  
-		}
-		else { echo "<script type='text/javascript'>alert('Acesso negado! Matrícula ou senha incorreta.')</script>";
-		}
-	}
-	?>
-	</body>
-</html>
+require __DIR__.'/vendor/autoload.php';
+
+/*
+|--------------------------------------------------------------------------
+| Turn On The Lights
+|--------------------------------------------------------------------------
+|
+| We need to illuminate PHP development, so let us turn on the lights.
+| This bootstraps the framework and gets it ready for use, then it
+| will load up this application so that we can run it and send
+| the responses back to the browser and delight our users.
+|
+*/
+
+$app = require_once __DIR__.'/bootstrap/app.php';
+
+/*
+|--------------------------------------------------------------------------
+| Run The Application
+|--------------------------------------------------------------------------
+|
+| Once we have the application, we can handle the incoming request
+| through the kernel, and send the associated response back to
+| the client's browser allowing them to enjoy the creative
+| and wonderful application we have prepared for them.
+|
+*/
+
+$kernel = $app->make(Illuminate\Contracts\Http\Kernel::class);
+
+$response = $kernel->handle(
+    $request = Illuminate\Http\Request::capture()
+);
+
+$response->send();
+
+$kernel->terminate($request, $response);
