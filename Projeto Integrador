@@ -1,1 +1,19 @@
 Projeto integrador de um Sistema de Gerenciamento de Biblioteca
+
+Login Administrador:
+Email: administrador@app.com
+Senha: password
+
+Login Bibliotecario
+Email: bibliotecario@app.com
+Senha: password
+
+Login Usuario:
+Email: usuario@app.com
+Senha: password
+
+Demais emails:
+Senha: senha
+
+
+Exceção aos cinco últimos cadastrados com nomes (que são de fato nomes e não para testes como os primeiros), os quais minha irmã não lembra a senha que colocou.
